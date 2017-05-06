@@ -1,4 +1,6 @@
-#Feed-forward multi-layered neural network
+# Feed-forward multi-layered neural network
+
+This is a project given for a *Machine Learning* course.
 
 This frameworks aims to implement a machine learning tool. More precisely,
 a feed-forward multi-layered neural network which 
@@ -7,7 +9,7 @@ a feed-forward multi-layered neural network which
 - trains by using the backpropagation algorithm,
 - gets tested by the k-fold, cross validation method.
 
- ##Inputs
+ ## Inputs
  
 The .csv is supposed to have a specific structure: the first row must be dedicated to the attributes' labels, 
 all values must be both numeric (int or float) and positive, missing values must be represented with the character -1, 
