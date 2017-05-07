@@ -1,6 +1,6 @@
 # Feed-forward multi-layered neural network
 
-This is a project given for a *Machine Learning* course.
+This is a project given in a *Machine Learning* course.
 ## Overview
 This frameworks aims to implement a machine learning tool. More precisely,
 a feed-forward multi-layered neural network which 
