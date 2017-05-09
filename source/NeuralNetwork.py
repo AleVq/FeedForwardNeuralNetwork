@@ -37,7 +37,6 @@ class NeuralNetwork:
 
 
 
-
 if __name__ == '__main__':
     n= NeuralNetwork(np.array([2,3,2,1]), 'sigmoid')
     print(n.weight)
