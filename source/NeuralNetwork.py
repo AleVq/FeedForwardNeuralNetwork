@@ -28,6 +28,9 @@ class NeuralNetwork:
             self.activ_func = softplus
             self.activ_func_der = softplus_deriv
         self.weight = []
+        # each matrix has m rows, when m = num of previous layer's node
+        # and n columns, where n = num of next layer's node
+        # values are initiated randomly
         for i in np.arange(1, nodesPerLayer.shape[0]):
             if i == nodesPerLayer.shape[0]-1:
                 temp = np.random.random((nodesPerLayer[i - 1] + 1, nodesPerLayer[i]))
