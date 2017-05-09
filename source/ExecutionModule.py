@@ -1,4 +1,4 @@
-from .featureSelector import Selector
+from featureSelector import Selector
 
 def executeProgram():
     #selector = Selector('../risk_factors_cervical_cancer.csv')
@@ -6,5 +6,5 @@ def executeProgram():
     featureSelectedDS = selector.apply_feature_selection(10)
     print(featureSelectedDS)
 
-
-executeProgram()
+if __name__ == '__main__':
+    executeProgram()
