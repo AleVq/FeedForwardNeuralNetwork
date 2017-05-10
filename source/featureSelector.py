@@ -8,6 +8,7 @@ class Selector:
     # calculates the average for attributes and for the target column skipping NaN values
     def __init__(self, fileName):
         self.dataSet = self.parse(fileName)
+        self.targets = self.dataSet[:, self.dataSet.shape[1]-1]
         self.x_mean = np.nanmean(self.dataSet, axis=0)#each attribute's average value
         self.y_mean = self.x_mean[self.x_mean.size-1]#target average value
         self.x_mean = np.delete(self.x_mean, self.x_mean.size-1) #delete target column
@@ -73,7 +74,7 @@ class Selector:
         ds = self.dataSet
         x_mean = self.x_mean
         if x_mean[i] == 0:
-            return 0 #if in all instances the value of the considered attribute is 0, for example
+            return 0 # if in all instances the value of the considered attribute is 0, for example
         y_mean = self.y_mean
         k = 0
         sum_numerator = 0
