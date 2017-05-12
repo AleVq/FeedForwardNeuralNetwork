@@ -1,6 +1,5 @@
 import numpy as np
 import math
-from featureSelector import Selector
 
 # defining two different activation functions
 # sigmoid function and its derivative
@@ -48,13 +47,19 @@ class NeuralNetwork:
 
     # learning with back propagation
     # x = single example, t = example's target
-    def bp_learning(self, X, T, learning_rate, epoch):
+    def bp_learning(self, X, T, learning_rate, runs):
         # adding the bias to the input layer
         biases = np.atleast_2d(np.ones(X.shape[0]))
         X = np.concatenate((biases.T, X), axis=1)
-        for actualEpoch in range(epoch):
+        for run in range(runs):
             i = np.random.randint(X.shape[0])
-            layers_output = [X[i]]
+            temp = []
+            for n in X[i]:
+                if n == np.NaN:
+                    temp.append(0)
+                else:
+                    temp.append(n)
+            layers_output = [temp]
             # feed forward up to the output layer (included)
             for layer in range(len(self.weights)):
                 dot_product = np.dot(layers_output[layer], self.weights[layer])
@@ -77,22 +82,12 @@ class NeuralNetwork:
                 delta = np.atleast_2d(deltas[weight_layer])
                 self.weights[weight_layer] += learning_rate * layer.T.dot(delta)
 
-    # returns the total error of the network w.r.t. the terget's value
+    # returns the total error of the network w.r.t. the target's value
     def test(self, x, target):
         temp = np.concatenate(([1], x))
         layers_output = [temp]
+        self.errors = []
         for weight_layer in range(0, len(self.weights)):
             layers_output = self.activ_func(np.dot(layers_output, self.weights[weight_layer]))
-        print('result: ', layers_output[-1], ', error: ', target - layers_output[-1])
-
-if __name__ == '__main__':
-    # featureSelection
-    selector = Selector('../xorTest.csv')
-    ds = selector.apply_feature_selection(2)
-    # k-fold validation
-    #cross_validation(ds, selector.targets, 0.03, 1, [2,2,1], 1000)
-    n = NeuralNetwork(np.array([2,2,1]), 'tah')
-    for i in range(0, len(ds)):
-        n.bp_learning(ds, selector.targets,0.02, 30000)
-    for i in range(0, len(ds)):
-        n.test(ds[i], selector.targets[i])
+        self.errors.append(target - layers_output[-1])
+        return layers_output[-1] - target

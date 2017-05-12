@@ -1,5 +1,6 @@
 from featureSelector import Selector
 
+
 def executeProgram():
     #selector = Selector('../risk_factors_cervical_cancer.csv')
     selector = Selector('../risk_factors_cervical_cancer.csv')
