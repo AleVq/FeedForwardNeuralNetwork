@@ -18,6 +18,13 @@ def tanh(x):
     return np.tanh(x)
 def tanh_prime(x):
     return 1.0 - x ** 2
+
+def theta(x):
+    if x > 0.5:
+        return 1
+    else:
+        return 0
+
 class NeuralNetwork:
 
     # defining the basic structure of the NN: a list of matrices
@@ -81,8 +88,7 @@ class NeuralNetwork:
                 layer = np.atleast_2d(layers_output[weight_layer])
                 delta = np.atleast_2d(deltas[weight_layer])
                 self.weights[weight_layer] += learning_rate * layer.T.dot(delta)
-
-    # returns the total error of the network w.r.t. the target's value
+    # returns the error of the network w.r.t. the target's value of a single instance
     def test(self, x, target):
         temp = np.concatenate(([1], x))
         layers_output = [temp]
@@ -91,3 +97,13 @@ class NeuralNetwork:
             layers_output = self.activ_func(np.dot(layers_output, self.weights[weight_layer]))
         self.errors.append(target - layers_output[-1])
         return layers_output[-1] - target
+    # returns the error of the network w.r.t. the target's value of a single instance after applying a threshold on the output layer
+    def test_theta(self, x, target):
+        temp = np.concatenate(([1], x))
+        layers_output = [temp]
+        self.errors = []
+        for weight_layer in range(0, len(self.weights)):
+            layers_output = self.activ_func(np.dot(layers_output, self.weights[weight_layer]))
+        result = theta(layers_output[-1])
+        return target - result
+

@@ -20,4 +20,4 @@ The feature selection filters attributes by appying the Pearson's coefficient-ba
 In k-fold cross validation, the dataset is divided in *k* folds, one of which is the test set, where as all the other are the training set. 
 
 ## Runs
-In the training phase, we present the net one example taken randomly from the training test. This example is feed-fowarded in the net, after getting the result, the error is computed and backpropagated and the weights are updated accordingly. We call this process a *run*. The learning process requires many runs, in the order of magnitude of 10^4.
+In the training phase, we present the net one example taken randomly from the training test. This example is feed-fowarded into the net, after getting the result, the error is computed and backpropagated and the weights are updated accordingly. We call this process a *run*. The learning process requires many runs, in the order of magnitude of 10^4.
